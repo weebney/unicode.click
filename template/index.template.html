@@ -1,0 +1,353 @@
+{{define "title"}}{{end}}
+
+{{define "extraHead"}}
+<style>
+    #main {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: fit-content;
+        padding-top: 3vh;
+    }
+
+    #nav {
+        width: 50vw;
+        font-size: 14px;
+        text-align: justify;
+    }
+
+    #trifold {
+        width: 50% ;
+        display:grid;
+        grid-template-rows: auto 1fr auto;
+        height: fit-content;
+        padding-bottom: 3vh;
+    }
+
+    ul {
+        list-style-position: inside;
+        padding-left: 0;
+        width: fit-content;
+
+        display: flex;
+        flex-wrap: wrap;
+
+        justify-content: left;
+        align-items: center;
+        flex-direction: row;
+    }
+
+    li {
+        width: calc(100% / 3);
+    }
+
+</style>
+</style>
+{{end}}
+
+{{define "main"}}
+<div id="main">
+    <div>
+        <div>
+            <h1 style="font-size: xx-large;">🖱<br>unicode.click</h1>
+        </div>
+        <div id="nav">
+            <p>
+                There is no technology more human than language. Few things have been as revolutionary to our kind as
+                our discoveries that rely on language- society, culture, recorded history, mathematics, the printing
+                press, LLMs.
+                Language, however, has a problem in that, in the image of its creators, it is complex and beastly.
+                Taming language for the internet age would be no simple task, but what emerged was something unexpected.
+            </p>
+            <p>
+                In 1988, the Unicode® Standard was drafted. This standard, though just a concept on a piece of paper,
+                came to define how all languages would interface with technology, and by extension humanity, from that
+                point forward.
+            </p>
+            <p>
+                Unicode® is a system for the organization, categorization, and exploration of language components.
+                Despite this, Unicode® is actually extremely simple.
+                This website allows you to visually explore the tables that comprise the modern Unicode® specification.
+            </p>
+
+        </div>
+    </div>
+</div>
+<div style="display: flex; align-items: center;justify-content: center;">
+    <div id="trifold">
+        <div>
+            <div>
+                <h2>Categories<sup><a href="https://en.wikipedia.org/wiki/Unicode_character_property#General_Category"
+                            target="_blank">?</a></sup>
+                </h2>
+            </div>
+            <ul>
+                <li><a href="/range/cc">cc</a></li>
+                <li><a href="/range/cf">cf</a></li>
+                <li><a href="/range/co">co</a></li>
+                <li><a href="/range/cs">cs</a></li>
+                <li><a href="/range/nd">nd</a></li>
+                <!--                 <li><a href="/range/letter">letter</a></li>
+ -->
+                <li><a href="/range/l">l</a></li>
+                <li><a href="/range/lm">lm</a></li>
+                <li><a href="/range/lo">lo</a></li>
+                <!--                 <li><a href="/range/lower">lower</a></li>
+ -->
+                <li><a href="/range/ll">ll</a></li>
+                <!--                 <li><a href="/range/mark">mark</a></li>
+ -->
+                <li><a href="/range/m">m</a></li>
+                <li><a href="/range/mc">mc</a></li>
+                <li><a href="/range/me">me</a></li>
+                <li><a href="/range/mn">mn</a></li>
+                <li><a href="/range/nl">nl</a></li>
+                <li><a href="/range/no">no</a></li>
+                <!--                 <li><a href="/range/number">number</a></li>
+ -->
+                <li><a href="/range/n">n</a></li>
+                <!--                 <li><a href="/range/other">other</a></li>
+ -->
+                <li><a href="/range/c">c</a></li>
+                <li><a href="/range/pc">pc</a></li>
+                <li><a href="/range/pd">pd</a></li>
+                <li><a href="/range/pe">pe</a></li>
+                <li><a href="/range/pf">pf</a></li>
+                <li><a href="/range/pi">pi</a></li>
+                <li><a href="/range/po">po</a></li>
+                <li><a href="/range/ps">ps</a></li>
+                <!--                 <li><a href="/range/punct">punct</a></li>
+ -->
+                <li><a href="/range/p">p</a></li>
+                <li><a href="/range/sc">sc</a></li>
+                <li><a href="/range/sk">sk</a></li>
+                <li><a href="/range/sm">sm</a></li>
+                <li><a href="/range/so">so</a></li>
+                <!--                 <li><a href="/range/space">space</a></li>
+ -->
+                <li><a href="/range/z">z</a></li>
+                <!--                 <li><a href="/range/symbol">symbol</a></li>
+ -->
+                <li><a href="/range/s">s</a></li>
+                <!--                 <li><a href="/range/title">title</a></li>
+ -->
+                <li><a href="/range/lt">lt</a></li>
+                <!--                 <li><a href="/range/upper">upper</a></li>
+ -->
+                <li><a href="/range/lu">lu</a></li>
+                <li><a href="/range/zl">zl</a></li>
+                <li><a href="/range/zp">zp</a></li>
+                <li><a href="/range/zs">zs</a></li>
+            </ul>
+        </div>
+
+        <div>
+            <h2>Properties</h2>
+            <ul>
+                <li><a href="/range/ascii_hex_digit">ascii_hex_digit</a></li>
+                <li><a href="/range/bidi_control">bidi_control</a></li>
+                <li><a href="/range/dash">dash</a></li>
+                <li><a href="/range/deprecated">deprecated</a></li>
+                <li><a href="/range/diacritic">diacritic</a></li>
+                <li><a href="/range/extender">extender</a></li>
+                <li><a href="/range/hex_digit">hex_digit</a></li>
+                <li><a href="/range/hyphen">hyphen</a></li>
+                <li><a href="/range/ids_binary_operator">ids_binary_operator</a></li>
+                <li><a href="/range/ids_trinary_operator">ids_trinary_operator</a></li>
+                <li><a href="/range/ideographic">ideographic</a></li>
+                <li><a href="/range/join_control">join_control</a></li>
+                <li><a href="/range/logical_order_exception">logical_order_exception</a></li>
+                <!--                 <li><a href="/range/noncharacter_code_point">noncharacter_code_point</a></li>
+ -->
+                <li><a href="/range/other_alphabetic">other_alphabetic</a></li>
+                <li><a href="/range/other_default_ignorable_code_point">other_default_ignorable_code_point</a>
+                </li>
+                <li><a href="/range/other_grapheme_extend">other_grapheme_extend</a></li>
+                <li><a href="/range/other_id_continue">other_id_continue</a></li>
+                <li><a href="/range/other_id_start">other_id_start</a></li>
+                <li><a href="/range/other_lowercase">other_lowercase</a></li>
+                <li><a href="/range/other_math">other_math</a></li>
+                <li><a href="/range/other_uppercase">other_uppercase</a></li>
+                <li><a href="/range/pattern_syntax">pattern_syntax</a></li>
+                <li><a href="/range/pattern_white_space">pattern_white_space</a></li>
+                <li><a href="/range/prepended_concatenation_mark">prepended_concatenation_mark</a></li>
+                <li><a href="/range/quotation_mark">quotation_mark</a></li>
+                <li><a href="/range/radical">radical</a></li>
+                <li><a href="/range/regional_indicator">regional_indicator</a></li>
+                <!--                 <li><a href="/range/sterm">sterm</a></li>
+ -->
+                <li><a href="/range/sentence_terminal">sentence_terminal</a></li>
+                <li><a href="/range/soft_dotted">soft_dotted</a></li>
+                <li><a href="/range/terminal_punctuation">terminal_punctuation</a></li>
+                <li><a href="/range/unified_ideograph">unified_ideograph</a></li>
+                <li><a href="/range/variation_selector">variation_selector</a></li>
+                <li><a href="/range/white_space">white_space</a></li>
+            </ul>
+        </div>
+
+        <div>
+            <h2>Scripts</h2>
+            <ul>
+                <li><a href="/range/adlam">adlam</a></li>
+                <li><a href="/range/ahom">ahom</a></li>
+                <li><a href="/range/anatolian_hieroglyphs">anatolian_hieroglyphs</a></li>
+                <li><a href="/range/arabic">arabic</a></li>
+                <li><a href="/range/armenian">armenian</a></li>
+                <li><a href="/range/avestan">avestan</a></li>
+                <li><a href="/range/balinese">balinese</a></li>
+                <li><a href="/range/bamum">bamum</a></li>
+                <li><a href="/range/bassa_vah">bassa_vah</a></li>
+                <li><a href="/range/batak">batak</a></li>
+                <li><a href="/range/bengali">bengali</a></li>
+                <li><a href="/range/bhaiksuki">bhaiksuki</a></li>
+                <li><a href="/range/bopomofo">bopomofo</a></li>
+                <li><a href="/range/brahmi">brahmi</a></li>
+                <li><a href="/range/braille">braille</a></li>
+                <li><a href="/range/buginese">buginese</a></li>
+                <li><a href="/range/buhid">buhid</a></li>
+                <li><a href="/range/canadian_aboriginal">canadian_aboriginal</a></li>
+                <li><a href="/range/carian">carian</a></li>
+                <li><a href="/range/caucasian_albanian">caucasian_albanian</a></li>
+                <li><a href="/range/chakma">chakma</a></li>
+                <li><a href="/range/cham">cham</a></li>
+                <li><a href="/range/cherokee">cherokee</a></li>
+                <li><a href="/range/chorasmian">chorasmian</a></li>
+                <li><a href="/range/common">common</a></li>
+                <li><a href="/range/coptic">coptic</a></li>
+                <li><a href="/range/cuneiform">cuneiform</a></li>
+                <li><a href="/range/cypriot">cypriot</a></li>
+                <li><a href="/range/cyrillic">cyrillic</a></li>
+                <li><a href="/range/deseret">deseret</a></li>
+                <li><a href="/range/devanagari">devanagari</a></li>
+                <li><a href="/range/dives_akuru">dives_akuru</a></li>
+                <li><a href="/range/dogra">dogra</a></li>
+                <li><a href="/range/duployan">duployan</a></li>
+                <li><a href="/range/egyptian_hieroglyphs">egyptian_hieroglyphs</a></li>
+                <li><a href="/range/elbasan">elbasan</a></li>
+                <li><a href="/range/elymaic">elymaic</a></li>
+                <li><a href="/range/ethiopic">ethiopic</a></li>
+                <li><a href="/range/georgian">georgian</a></li>
+                <li><a href="/range/glagolitic">glagolitic</a></li>
+                <li><a href="/range/gothic">gothic</a></li>
+                <li><a href="/range/grantha">grantha</a></li>
+                <li><a href="/range/greek">greek</a></li>
+                <li><a href="/range/gujarati">gujarati</a></li>
+                <li><a href="/range/gunjala_gondi">gunjala_gondi</a></li>
+                <li><a href="/range/gurmukhi">gurmukhi</a></li>
+                <li><a href="/range/han">han</a></li>
+                <li><a href="/range/hangul">hangul</a></li>
+                <li><a href="/range/hanifi_rohingya">hanifi_rohingya</a></li>
+                <li><a href="/range/hanunoo">hanunoo</a></li>
+                <li><a href="/range/hatran">hatran</a></li>
+                <li><a href="/range/hebrew">hebrew</a></li>
+                <li><a href="/range/hiragana">hiragana</a></li>
+                <li><a href="/range/imperial_aramaic">imperial_aramaic</a></li>
+                <li><a href="/range/inherited">inherited</a></li>
+                <li><a href="/range/inscriptional_pahlavi">inscriptional_pahlavi</a></li>
+                <li><a href="/range/inscriptional_parthian">inscriptional_parthian</a></li>
+                <li><a href="/range/javanese">javanese</a></li>
+                <li><a href="/range/kaithi">kaithi</a></li>
+                <li><a href="/range/kannada">kannada</a></li>
+                <li><a href="/range/katakana">katakana</a></li>
+                <li><a href="/range/kayah_li">kayah_li</a></li>
+                <li><a href="/range/kharoshthi">kharoshthi</a></li>
+                <li><a href="/range/khitan_small_script">khitan_small_script</a></li>
+                <li><a href="/range/khmer">khmer</a></li>
+                <li><a href="/range/khojki">khojki</a></li>
+                <li><a href="/range/khudawadi">khudawadi</a></li>
+                <li><a href="/range/lao">lao</a></li>
+                <li><a href="/range/latin">latin</a></li>
+                <li><a href="/range/lepcha">lepcha</a></li>
+                <li><a href="/range/limbu">limbu</a></li>
+                <li><a href="/range/linear_a">linear_a</a></li>
+                <li><a href="/range/linear_b">linear_b</a></li>
+                <li><a href="/range/lisu">lisu</a></li>
+                <li><a href="/range/lycian">lycian</a></li>
+                <li><a href="/range/lydian">lydian</a></li>
+                <li><a href="/range/mahajani">mahajani</a></li>
+                <li><a href="/range/makasar">makasar</a></li>
+                <li><a href="/range/malayalam">malayalam</a></li>
+                <li><a href="/range/mandaic">mandaic</a></li>
+                <li><a href="/range/manichaean">manichaean</a></li>
+                <li><a href="/range/marchen">marchen</a></li>
+                <li><a href="/range/masaram_gondi">masaram_gondi</a></li>
+                <li><a href="/range/medefaidrin">medefaidrin</a></li>
+                <li><a href="/range/meetei_mayek">meetei_mayek</a></li>
+                <li><a href="/range/mende_kikakui">mende_kikakui</a></li>
+                <li><a href="/range/meroitic_cursive">meroitic_cursive</a></li>
+                <li><a href="/range/meroitic_hieroglyphs">meroitic_hieroglyphs</a></li>
+                <li><a href="/range/miao">miao</a></li>
+                <li><a href="/range/modi">modi</a></li>
+                <li><a href="/range/mongolian">mongolian</a></li>
+                <li><a href="/range/mro">mro</a></li>
+                <li><a href="/range/multani">multani</a></li>
+                <li><a href="/range/myanmar">myanmar</a></li>
+                <li><a href="/range/nabataean">nabataean</a></li>
+                <li><a href="/range/nandinagar">nandinagar</a></li>
+                <li><a href="/range/new_tai_lue">new_tai_lue</a></li>
+                <li><a href="/range/newa">newa</a></li>
+                <li><a href="/range/nko">nko</a></li>
+                <li><a href="/range/nushu">nushu</a></li>
+                <li><a href="/range/nyiakeng_puachue_hmong">nyiakeng_puachue_hmong</a></li>
+                <li><a href="/range/ogham">ogham</a></li>
+                <li><a href="/range/ol_chiki">ol_chiki</a></li>
+                <li><a href="/range/old_hungarian">old_hungarian</a></li>
+                <li><a href="/range/old_italic">old_italic</a></li>
+                <li><a href="/range/old_north_arabian">old_north_arabian</a></li>
+                <li><a href="/range/old_permic">old_permic</a></li>
+                <li><a href="/range/old_persian">old_persian</a></li>
+                <li><a href="/range/old_sogdian">old_sogdian</a></li>
+                <li><a href="/range/old_south_arabian">old_south_arabian</a></li>
+                <li><a href="/range/old_turkic">old_turkic</a></li>
+                <li><a href="/range/oriya">oriya</a></li>
+                <li><a href="/range/osage">osage</a></li>
+                <li><a href="/range/osmanya">osmanya</a></li>
+                <li><a href="/range/pahawh_hmong">pahawh_hmong</a></li>
+                <li><a href="/range/palmyrene">palmyrene</a></li>
+                <li><a href="/range/pau_cin_hau">pau_cin_hau</a></li>
+                <li><a href="/range/phags_pa">phags_pa</a></li>
+                <li><a href="/range/phoenician">phoenician</a></li>
+                <li><a href="/range/psalter_pahlavi">psalter_pahlavi</a></li>
+                <li><a href="/range/rejang">rejang</a></li>
+                <li><a href="/range/runic">runic</a></li>
+                <li><a href="/range/samaritan">samaritan</a></li>
+                <li><a href="/range/saurashtra">saurashtra</a></li>
+                <li><a href="/range/sharada">sharada</a></li>
+                <li><a href="/range/shavian">shavian</a></li>
+                <li><a href="/range/siddham">siddham</a></li>
+                <li><a href="/range/signwriting">signwriting</a></li>
+                <li><a href="/range/sinhala">sinhala</a></li>
+                <li><a href="/range/sogdian">sogdian</a></li>
+                <li><a href="/range/sora_sompeng">sora_sompeng</a></li>
+                <li><a href="/range/soyombo">soyombo</a></li>
+                <li><a href="/range/sundanese">sundanese</a></li>
+                <li><a href="/range/syloti_nagri">syloti_nagri</a></li>
+                <li><a href="/range/syriac">syriac</a></li>
+                <li><a href="/range/tagalog">tagalog</a></li>
+                <li><a href="/range/tagbanwa">tagbanwa</a></li>
+                <li><a href="/range/tai_le">tai_le</a></li>
+                <li><a href="/range/tai_tham">tai_tham</a></li>
+                <li><a href="/range/tai_viet">tai_viet</a></li>
+                <li><a href="/range/takri">takri</a></li>
+                <li><a href="/range/tamil">tamil</a></li>
+                <li><a href="/range/tangut">tangut</a></li>
+                <li><a href="/range/telugu">telugu</a></li>
+                <li><a href="/range/thaana">thaana</a></li>
+                <li><a href="/range/thai">thai</a></li>
+                <li><a href="/range/tibetan">tibetan</a></li>
+                <li><a href="/range/tifinagh">tifinagh</a></li>
+                <li><a href="/range/tirhuta">tirhuta</a></li>
+                <li><a href="/range/ugaritic">ugaritic</a></li>
+                <li><a href="/range/vai">vai</a></li>
+                <li><a href="/range/wancho">wancho</a></li>
+                <li><a href="/range/warang_citi">warang_citi</a></li>
+                <li><a href="/range/yezidi">yezidi</a></li>
+                <li><a href="/range/yi">yi</a></li>
+                <li><a href="/range/zanabazar_square">zanabazar_square</a></li>
+            </ul>
+        </div>
+
+        
+    </div>
+</div>
+{{end}}

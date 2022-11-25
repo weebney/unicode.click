@@ -1,0 +1,152 @@
+{{define "base"}}
+<!doctype html>
+<html lang='en'>
+
+<head>
+    <meta charset='utf-16'>
+    <title>{{template "title" .}} unicode.click</title>
+
+    {{template "extraHead" .}}
+
+    <script src="https://unpkg.com/tachyonjs@latest/tachyon.min.js" defer crossorigin=""></script>
+
+    <style>
+        ::selection {
+            color: white;
+            background: black;
+        }
+
+        #main {
+            font-size: xx-large;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            width: 100%;
+        }
+
+        body {
+            font-family: 'Fragment Mono', monospace;
+        }
+
+        footer {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding-bottom: 4vh;
+            overflow-y: hidden;
+            text-align: center;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        a:hover {
+            font-style: oblique;
+        }
+
+        .serif {
+            font-family: serif;
+        }
+
+        .sans {
+            font-family: sans-serif;
+        }
+
+        .monospace {
+            font-family: 'Fragment Mono', monospace;
+        }
+
+        .pseudobutton:hover {
+            cursor: pointer;
+        }
+
+        #modal {
+            background-color: lightgrey;
+
+            outline: black solid 1px;
+
+            padding: 1vw;
+        }
+
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            border: 0;
+        }
+    </style>
+
+    <script>
+        window.onload = function () {
+            let modal = document.getElementById("modal")
+            function toggleModal() {
+                if (modal.hidden) {
+                    modal.hidden = false
+                    window.scroll({
+                        top: 10000,
+                        behavior: "smooth",
+                    });
+                } else {
+                    modal.hidden = true
+                }
+            }
+
+            let settingsButton = document.getElementById("settings")
+            settingsButton.addEventListener("click", toggleModal)
+            let closeButton = document.getElementById("closebutton")
+            closeButton.addEventListener("click", toggleModal)
+        };
+    </script>
+
+    <style>
+    @import url('https://fonts.googleapis.com/css2?family=Fragment+Mono&display=swap');
+    </style> 
+
+</head>
+
+<body>
+
+    <main>
+        {{template "main" .}}
+    </main>
+    <footer>
+        <div>
+            <a href="https://www.unicode.org/consortium/consort.html" target="_blank">Unicode®</a>
+            <a href="https://www.unicode.org/versions/Unicode13.0.0/" target="_blank">{{.UnicodeVersion}}</a>
+            <br>
+            <a href="/">unicode.click 🖱</a> | <a id="settings" class="pseudobutton"
+                onclick="(function(){});">about</a>
+        </div>
+    </footer>
+
+    <div id="modal" hidden>
+        <p id="closebutton" class="pseudobutton" style="text-align: right;" hidden>x</p>
+        <p style="text-align: center;">This website was created by <a href="https://github.com/weebney" target="none">weebney</a> and is licensed under the <a href="https://raw.githubusercontent.com/weebney/unicode.click/main/LICENSE" target="_blank">BSD 2-clause license</a>.</p>
+        <p style="text-align: center;">It is source available on <a href="https://github.com/weebney/unicode.click">GitHub</a>.</p>
+<!--<fieldset id="closebutton" class="pseudobutton"
+            style="text-align: right;padding: 0.3vw; background-color: black;color: white;">
+            <span>x</span>
+        </fieldset>
+                 <h2 style="text-align: center;">settings</h2>
+        <div style="display: flex; justify-content: space-between; width:100%;">
+            <fieldset style="display: flex; justify-content: space-evenly; width: 45%; height: 100%;">
+                <legend style="    margin:0 auto;">color scheme</legend>
+                <a id="dark" class="pseudobutton" onclick="(function(){});">dark</a>
+                <a id="dark" class="pseudobutton" onclick="(function(){});">light</a>
+            </fieldset>
+            <br>
+            <fieldset style="display: flex; justify-content: space-evenly; width:45%; height: 100%;">
+                <legend style="    margin:0 auto;">font style</legend>
+                <a id="serifbutton" class="pseudobutton" onclick="(function(){});">serif</a>
+                <a id="sansbutton" class="pseudobutton" onclick="(function(){});">sans</a>
+                <a id="monospacebutton" class="pseudobutton" onclick="(function(){});">monospace</a>
+            </fieldset>
+        </div> -->
+    </div>
+</body>
+
+</html>
+{{end}}

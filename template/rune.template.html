@@ -1,0 +1,300 @@
+{{define "title"}}{{.LitRune}} ({{.CodepointHexAsString}}) {{.RuneName}} · {{end}}
+
+{{define "extraHead"}}
+<style>
+    #head {
+        display: flex;
+        height: 100vh;
+        min-height: 100vh;
+        justify-content: center;
+        align-items: center;
+    }
+
+    #info {
+        background-color: black;
+        color: white;
+        text-align: center;
+        height: 90vh;
+        min-height: 100vh;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        font-size: 14px;
+
+    }
+
+    #info>div>h1>div {
+        outline: none;
+    }
+
+    #info::selection {
+        color: black;
+        background: white;
+    }
+
+    footer {
+        background-color: black;
+        color: white;
+    }
+
+    dl {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-gap: 2vh;
+    }
+
+    dt {
+        text-align: right;
+    }
+
+    dd {
+        text-align: left;
+        margin-left: 0%;
+    }
+
+    h1>div {
+        line-height: 1;
+        outline: grey solid 0.1vw;
+        display: inline-flex;
+        align-items: baseline;
+        width: 6ex;
+        height: 6ex;
+        z-index: 10;
+        position: relative;
+        margin-left: 0.5vw;
+        margin-right: 0.5vw;
+        text-align: center;
+    }
+
+    h1>div>span {
+        position: relative;
+        font-size: 6ex;
+        z-index: 11;
+        width: 100%;
+        height: max-content;
+    }
+
+    .absoluteGL {
+        position: absolute;
+        z-index: 1;
+        width: 50%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        z-index: 0;
+        outline: lightgrey dashed 0.1vw;
+    }
+
+    .subgl {
+        height: 50%;
+        width: 100%;
+        transform: translateY(calc(2/3 * 100%));
+        outline: none;
+        border-bottom: lightgrey dashed 0.1vw;
+        border-top: lightgrey dashed 0.1vw;
+    }
+
+
+    #majorCat {
+        margin: 0;
+    }
+
+
+    ul,
+    li {
+        list-style-position: inside;
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+    }
+</style>
+
+{{end}}
+
+{{define "main"}}
+<div id="main">
+    <div id="head">
+        <div>
+            <h1>
+                <div id="serifbox">
+                    <span class="serif">{{.LitRune}}</span>
+                    <div class="absoluteGL" style="transform: translateX(100%);"></div>
+                    <div class="absoluteGL"></div>
+                    <div class="absoluteGL subgl"></div>
+                </div>
+                <div id="monobox">
+                    <span class="monospace">{{.LitRune}}</span>
+                    <div class="absoluteGL" style="transform: translateX(100%);"></div>
+                    <div class="absoluteGL"></div>
+                    <div class="absoluteGL subgl"></div>
+                </div>
+                <div id="sansbox">
+                    <span class="sans">{{.LitRune}}</span>
+                    <div class="absoluteGL" style="transform: translateX(100%);"></div>
+                    <div class="absoluteGL"></div>
+                    <div class="absoluteGL subgl"></div>
+                </div>
+            </h1>
+            <h2>{{.RuneName}}</h2>
+            {{ if .IsPrint }}
+            <a id="runename" href="https://en.wiktionary.org/wiki/{{.LitRune}}" target="_blank">
+                {{ end }}
+                <h3>({{.CodepointHexAsString}})</h3>
+                {{ if .IsPrint }}
+            </a>
+            {{ end }}
+        </div>
+    </div>
+</div>
+<div id="info">
+    <div>
+        <h1>
+            <div>
+                <span class="serif">{{.LitRune}}</span>
+            </div>
+
+            <div>
+                <span class="monospace">{{.LitRune}}</span>
+            </div>
+
+            <div>
+                <span class="sans">{{.LitRune}}</span>
+            </div>
+        </h1>
+
+        <br>
+
+        <dl>
+            {{if .Scripts | ne ""}}
+            <dt>Script</dt>
+            <dd><a href="/range/{{.Scripts}}">{{.Scripts}}</a></dd>
+            {{end}}
+
+            <dt>Categories</dt>
+            <dd>
+                <p id="majorCat"><a href="/range/{{.MajCatLiteral}}">{{.MajorCategories}};</a></p>
+                <ul>
+                    <li><a href="/range/{{.CatLiteral}}">{{.Categories}}</a></li>
+                </ul>
+            </dd>
+
+            <dt>Properties</dt>
+            <dd>
+                <ul>
+                    {{ range .Properties }}
+                    <li><a href="/range/{{.}}">{{.}}</a></li>
+                    {{end}}
+
+                    {{ if .Properties}}
+                    <br>
+                    {{end}}
+
+                    {{ if .IsControl}}
+                    <a href="/range/cc">
+                        <li>Control</li>
+                    </a>
+                    {{end}}
+
+                    {{ if .IsDigit}}
+                    <a href="/range/nd">
+                        <li>Digit</li>
+                    </a>
+                    {{end}}
+
+                    {{ if .IsLetter}}
+                    <a href="/range/letter">
+                        <li>Letter</li>
+                    </a>
+                    {{end}}
+
+                    {{ if .IsLower}}
+                    <a href="/range/lower">
+                        <li>Lowercase</li>
+                    </a>
+                    {{end}}
+
+                    {{ if .IsUpper}}
+                    <a href="/range/upper">
+                        <li>Uppercase</li>
+                    </a>
+                    {{end}}
+
+                    {{ if .IsTitle}}
+                    <a href="/range/title">
+                        <li>Titlecase</li>
+                    </a>
+                    {{end}}
+
+                    {{ if .IsMark}}
+                    <a href="/range/mark">
+                        <li>Mark</li>
+                    </a>
+                    {{end}}
+
+                    {{ if .IsNumber}}
+                    <a href="/range/number">
+                        <li>Number</li>
+                    </a>
+                    {{end}}
+
+                    {{ if .IsPunct}}
+                    <a href="/range/punct">
+                        <li>Punctuation</li>
+                    </a>
+                    {{end}}
+
+                    {{ if .IsSpace}}
+                    <a href="/range/space">
+                        <li>Space</li>
+                    </a>
+                    {{end}}
+
+                    {{ if .IsSymbol}}
+                    <a href="/range/symbol">
+                        <li>Symbol</li>
+                    </a>
+                    {{end}}
+
+                </ul>
+            </dd>
+        </dl>
+
+        {{if .HasDifferentCase}}
+        <dl>
+            {{if .AsLowercase | ne .AsUppercase | and (not .IsUpper)}}
+            <dt>Uppercase</dt>
+            <dd>
+                <a href="/cp/{{.AsUppercase}}">
+                    <span class="monospace">{{.AsUppercase}}</span>
+                </a>
+            </dd>
+            {{end}}
+
+
+            {{if .AsLowercase | ne .AsUppercase | and (not .IsLower)}}
+            <dt>Lowercase</dt>
+            <dd>
+                <a href="/cp/{{.AsLowercase}}">
+                    <span class="monospace">{{.AsLowercase}}</span>
+                </a>
+            </dd>
+            {{end}}
+
+            {{if .AsTitlecase | ne .LitRune }}
+            {{if .AsTitlecase | ne .AsUppercase }}
+            <dt>Titlecase</dt>
+            <dd>
+                <a href="/cp/{{.AsTitlecase}}">
+                    <span class="monospace">{{.AsTitlecase}}</span>
+                </a>
+            </dd>
+            {{end}}
+            {{end}}
+        </dl>
+        {{end}}
+
+    </div>
+</div>
+{{end}}
