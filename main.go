@@ -54,8 +54,147 @@ type rangeData struct {
 	TableLiteral string
 }
 
-func codepointFromRoute(writer http.ResponseWriter, request *http.Request, params httprouter.Params) {
+func getCategoryData(codepoint rune) (majorCategoryLiteral string, categoryLiteral string, categories []string, majorCategories []string) {
+	for categoryName, categoryRangeTable := range unicode.Categories {
+		if unicode.Is(categoryRangeTable, codepoint) {
+			if len(categoryName) == 1 {
+				switch categoryName {
+				case "C":
+					categoryName = "Other (C)"
+					majorCategoryLiteral = (majorCategoryLiteral + "c")
+				case "L":
+					categoryName = "Letter (L)"
+					majorCategoryLiteral = (majorCategoryLiteral + "l")
+				case "M":
+					categoryName = "Mark (M)"
+					majorCategoryLiteral = (majorCategoryLiteral + "m")
+				case "N":
+					categoryName = "Number (N)"
+					majorCategoryLiteral = (majorCategoryLiteral + "n")
+				case "P":
+					categoryName = "Punctuation (P)"
+					majorCategoryLiteral = (majorCategoryLiteral + "p")
+				case "S":
+					categoryName = "Symbol (S)"
+					majorCategoryLiteral = (majorCategoryLiteral + "s")
+				case "Z":
+					categoryName = "Separator (Z)"
+					majorCategoryLiteral = (majorCategoryLiteral + "z")
+				}
 
+				majorCategories = append(majorCategories, categoryName)
+			} else {
+				switch categoryName {
+
+				// THE Cs
+				case "Cc":
+					categoryName = "Control (Cc)"
+					categoryLiteral = (categoryLiteral + "cc")
+				case "Cf":
+					categoryName = "Format (Cf)"
+					categoryLiteral = (categoryLiteral + "cf")
+				case "Co":
+					categoryName = "Private use (Co)"
+					categoryLiteral = (categoryLiteral + "co")
+				case "Cs":
+					categoryName = "Surrogate (Cs)"
+					categoryLiteral = (categoryLiteral + "cs")
+				// THE Ns
+				case "Nd":
+					categoryName = "Decimal (Nd)"
+					categoryLiteral = (categoryLiteral + "nd")
+				case "Nl":
+					categoryName = "Letter (Nl)"
+					categoryLiteral = (categoryLiteral + "nl")
+				case "No":
+					categoryName = "Other (No)"
+					categoryLiteral = (categoryLiteral + "no")
+
+				// THE Ls
+				case "Ll":
+					categoryName = "Lowercase (Ll)"
+					categoryLiteral = (categoryLiteral + "ll")
+				case "Lm":
+					categoryName = "Modifier (Lm)"
+					categoryLiteral = (categoryLiteral + "lm")
+				case "Lo":
+					categoryName = "Other (Lo)"
+					categoryLiteral = (categoryLiteral + "lo")
+				case "Lt":
+					categoryName = "Titlecase (Lt)"
+					categoryLiteral = (categoryLiteral + "lt")
+				case "Lu":
+					categoryName = "Uppercase (Lu)"
+					categoryLiteral = (categoryLiteral + "lu")
+
+				// THE Ms
+				case "Mc":
+					categoryName = "Spacing (Mc)"
+					categoryLiteral = (categoryLiteral + "mc")
+				case "Me":
+					categoryName = "Enclosing (Me)"
+					categoryLiteral = (categoryLiteral + "me")
+				case "Mn":
+					categoryName = "Nonspacing (Mn)"
+					categoryLiteral = (categoryLiteral + "mn")
+
+				// THE Ps
+				case "Pc":
+					categoryName = "Connector (Pc)"
+					categoryLiteral = (categoryLiteral + "pc")
+				case "Pd":
+					categoryName = "Dash (Pd)"
+					categoryLiteral = (categoryLiteral + "pd")
+				case "Pe":
+					categoryName = "Close (Pe)"
+					categoryLiteral = (categoryLiteral + "pe")
+				case "Pf":
+					categoryName = "Final quote (Pf)"
+					categoryLiteral = (categoryLiteral + "pf")
+				case "Pi":
+					categoryName = "Initial quote (Pi)"
+					categoryLiteral = (categoryLiteral + "pi")
+				case "Po":
+					categoryName = "Other (Po)"
+					categoryLiteral = (categoryLiteral + "po")
+				case "Ps":
+					categoryName = "Open (Ps)"
+					categoryLiteral = (categoryLiteral + "ps")
+
+				// THE Ss
+				case "Sc":
+					categoryName = "Currency (Sc)"
+					categoryLiteral = (categoryLiteral + "sc")
+				case "Sk":
+					categoryName = "Modifier (Sk)"
+					categoryLiteral = (categoryLiteral + "sk")
+				case "Sm":
+					categoryName = "Math (Sm)"
+					categoryLiteral = (categoryLiteral + "sm")
+				case "So":
+					categoryName = "Other (So)"
+					categoryLiteral = (categoryLiteral + "so")
+
+				// THE Zs
+				case "Zl":
+					categoryName = "Line (Zl)"
+					categoryLiteral = (categoryLiteral + "zl")
+				case "Zp":
+					categoryName = "Paragraph (Zp)"
+					categoryLiteral = (categoryLiteral + "zp")
+				case "Zs":
+					categoryName = "Space (Zs)"
+					categoryLiteral = (categoryLiteral + "zs")
+				}
+				categories = append(categories, categoryName)
+			}
+		}
+	}
+	return
+}
+
+func codepointFromRoute(writer http.ResponseWriter, request *http.Request, params httprouter.Params) {
+	timer := time.Now()
 	route := params.ByName("cpRoute")
 
 	writer.Header().Set("Content-Type", "text/html; charset=utf-8")
@@ -82,145 +221,7 @@ func codepointFromRoute(writer http.ResponseWriter, request *http.Request, param
 		return
 	}
 
-	var mcatSlice string
-	var catSlice string
-	var categories []string
-	var majorCategories []string
-	for categoryName, categoryRangeTable := range unicode.Categories {
-		if unicode.Is(categoryRangeTable, codepoint) {
-			if len(categoryName) == 1 {
-				switch categoryName {
-				case "C":
-					categoryName = "Other (C)"
-					mcatSlice = (mcatSlice + "c")
-				case "L":
-					categoryName = "Letter (L)"
-					mcatSlice = (mcatSlice + "l")
-				case "M":
-					categoryName = "Mark (M)"
-					mcatSlice = (mcatSlice + "m")
-				case "N":
-					categoryName = "Number (N)"
-					mcatSlice = (mcatSlice + "n")
-				case "P":
-					categoryName = "Punctuation (P)"
-					mcatSlice = (mcatSlice + "p")
-				case "S":
-					categoryName = "Symbol (S)"
-					mcatSlice = (mcatSlice + "s")
-				case "Z":
-					categoryName = "Separator (Z)"
-					mcatSlice = (mcatSlice + "z")
-				}
-
-				majorCategories = append(majorCategories, categoryName)
-			} else {
-				switch categoryName {
-
-				// THE Cs
-				case "Cc":
-					categoryName = "Control (Cc)"
-					catSlice = (catSlice + "cc")
-				case "Cf":
-					categoryName = "Format (Cf)"
-					catSlice = (catSlice + "cf")
-				case "Co":
-					categoryName = "Private use (Co)"
-					catSlice = (catSlice + "co")
-				case "Cs":
-					categoryName = "Surrogate (Cs)"
-					catSlice = (catSlice + "cs")
-				// THE Ns
-				case "Nd":
-					categoryName = "Decimal (Nd)"
-					catSlice = (catSlice + "nd")
-				case "Nl":
-					categoryName = "Letter (Nl)"
-					catSlice = (catSlice + "nl")
-				case "No":
-					categoryName = "Other (No)"
-					catSlice = (catSlice + "no")
-
-				// THE Ls
-				case "Ll":
-					categoryName = "Lowercase (Ll)"
-					catSlice = (catSlice + "ll")
-				case "Lm":
-					categoryName = "Modifier (Lm)"
-					catSlice = (catSlice + "lm")
-				case "Lo":
-					categoryName = "Other (Lo)"
-					catSlice = (catSlice + "lo")
-				case "Lt":
-					categoryName = "Titlecase (Lt)"
-					catSlice = (catSlice + "lt")
-				case "Lu":
-					categoryName = "Uppercase (Lu)"
-					catSlice = (catSlice + "lu")
-
-				// THE Ms
-				case "Mc":
-					categoryName = "Spacing (Mc)"
-					catSlice = (catSlice + "mc")
-				case "Me":
-					categoryName = "Enclosing (Me)"
-					catSlice = (catSlice + "me")
-				case "Mn":
-					categoryName = "Nonspacing (Mn)"
-					catSlice = (catSlice + "mn")
-
-				// THE Ps
-				case "Pc":
-					categoryName = "Connector (Pc)"
-					catSlice = (catSlice + "pc")
-				case "Pd":
-					categoryName = "Dash (Pd)"
-					catSlice = (catSlice + "pd")
-				case "Pe":
-					categoryName = "Close (Pe)"
-					catSlice = (catSlice + "pe")
-				case "Pf":
-					categoryName = "Final quote (Pf)"
-					catSlice = (catSlice + "pf")
-				case "Pi":
-					categoryName = "Initial quote (Pi)"
-					catSlice = (catSlice + "pi")
-				case "Po":
-					categoryName = "Other (Po)"
-					catSlice = (catSlice + "po")
-				case "Ps":
-					categoryName = "Open (Ps)"
-					catSlice = (catSlice + "ps")
-
-				// THE Ss
-				case "Sc":
-					categoryName = "Currency (Sc)"
-					catSlice = (catSlice + "sc")
-				case "Sk":
-					categoryName = "Modifier (Sk)"
-					catSlice = (catSlice + "sk")
-				case "Sm":
-					categoryName = "Math (Sm)"
-					catSlice = (catSlice + "sm")
-				case "So":
-					categoryName = "Other (So)"
-					catSlice = (catSlice + "so")
-
-				// THE Zs
-				case "Zl":
-					categoryName = "Line (Zl)"
-					catSlice = (catSlice + "zl")
-				case "Zp":
-					categoryName = "Paragraph (Zp)"
-					catSlice = (catSlice + "zp")
-				case "Zs":
-					categoryName = "Space (Zs)"
-					catSlice = (catSlice + "zs")
-				}
-				categories = append(categories, categoryName)
-			}
-		}
-	}
+	majorCategoryLiteral, categoryLiteral, categories, majorCategories := getCategoryData(codepoint)
 
 	var scripts []string
 	for scriptName, scriptRangeTable := range unicode.Scripts {
@@ -278,8 +279,8 @@ func codepointFromRoute(writer http.ResponseWriter, request *http.Request, param
 		Scripts:    strings.Join(scripts, ", "),
 		Properties: properties,
 
-		MajCatLiteral:   mcatSlice,
-		CatLiteral:      catSlice,
+		MajCatLiteral:   majorCategoryLiteral,
+		CatLiteral:      categoryLiteral,
 		MajorCategories: strings.Join(majorCategories, ", "),
 		Categories:      strings.Join(categories, ", "),
 
@@ -309,24 +310,10 @@ func codepointFromRoute(writer http.ResponseWriter, request *http.Request, param
 		"./template/rune.template.html",
 	}
 
-	serveFilesFromTemplate(writer, request, params, templateFiles, data)
-
+	serveFilesFromTemplate(writer, request, params, templateFiles, data, timer)
 }
 
-func rangeFromRoute(writer http.ResponseWriter, request *http.Request, params httprouter.Params) {
-
-	route := strings.ToLower(params.ByName("rangeRoute"))
-
-	writer.Header().Set("Content-Type", "text/html; charset=utf-8")
-	writer.Header().Set("Cache-Control", "no-cache, no-store, must-revalidate")
-	writer.Header().Set("Pragma", "no-cache")
-	writer.Header().Set("Expires", "0")
-
-	// ------------------------------------------------------
-	// EVERYTHING BELOW THIS IS FOR THE RANGETABLE PAGE
-
-	var rtLiteral *unicode.RangeTable
-
+func getRangeTableLiteral(route string) (rtLiteral *unicode.RangeTable) {
 	switch route {
 	case "adlam":
 		rtLiteral = unicode.Adlam
@@ -822,8 +809,10 @@ func rangeFromRoute(writer http.ResponseWriter, request *http.Request, params ht
 		route = "latin"
 	}
 
-	// Table Generation Code ================================
-	// ++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	return
+}
+
+func generateTableFromRTLiteral(rtLiteral *unicode.RangeTable) (tables []table, tableLengths []int) {
 	var rawRuneSlice []int32
 
 	for i := 0; i < len(rtLiteral.R16); i++ {
@@ -865,7 +854,7 @@ func rangeFromRoute(writer http.ResponseWriter, request *http.Request, params ht
 
 	// validate rows, pop them if invalid
 
-	tables := []table{}
+	tables = []table{}
 	for i := 0; i < len(rows); i++ {
 		tablePrefix := rows[i].name[:len(rows[i].name)-1]
 		rowSlice := []row{rows[i]}
@@ -881,13 +870,25 @@ func rangeFromRoute(writer http.ResponseWriter, request *http.Request, params ht
 		tables = append(tables, assembledTable)
 	}
 
-	// End Table Code =======================================
-	// ++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
-	var tableLengths []int
 	for i := 0; i < len(tables); i++ {
 		tableLengths = append(tableLengths, len(tables[i].rows))
 	}
+
+	return
+}
+
+func rangeFromRoute(writer http.ResponseWriter, request *http.Request, params httprouter.Params) {
+	timer := time.Now()
+	route := strings.ToLower(params.ByName("rangeRoute"))
+
+	writer.Header().Set("Content-Type", "text/html; charset=utf-8")
+	writer.Header().Set("Cache-Control", "no-cache, no-store, must-revalidate")
+	writer.Header().Set("Pragma", "no-cache")
+	writer.Header().Set("Expires", "0")
+
+	rtLiteral := getRangeTableLiteral(route)
+
+	tables, tableLengths := generateTableFromRTLiteral(rtLiteral)
 
 	var data = rangeData{
 		RangeTableName: route,
@@ -908,8 +909,7 @@ func rangeFromRoute(writer http.ResponseWriter, request *http.Request, params ht
 		"./template/range.template.html",
 	}
 
-	serveFilesFromTemplate(writer, request, params, templateFiles, data)
-
+	serveFilesFromTemplate(writer, request, params, templateFiles, data, timer)
 }
 
 func generateTableHtml(tables []table, tableLengths []int, literalRT *unicode.RangeTable) string {
@@ -961,7 +961,7 @@ func generateTableHtml(tables []table, tableLengths []int, literalRT *unicode.Ra
 	return output
 }
 
-func serveFilesFromTemplate(writer http.ResponseWriter, request *http.Request, params httprouter.Params, templates []string, data interface{}) {
+func serveFilesFromTemplate(writer http.ResponseWriter, request *http.Request, params httprouter.Params, templates []string, data interface{}, timer time.Time) {
 
 	// Define the template functions
 	funcMap := template.FuncMap{
@@ -983,7 +983,7 @@ func serveFilesFromTemplate(writer http.ResponseWriter, request *http.Request, p
 		http.Error(writer, "Internal Server Error", 500)
 	}
 
-	log.Printf("%s %s %s %s %s \n", request.UserAgent(), request.RemoteAddr, request.Method, request.URL, request.Proto)
+	log.Printf("%s, %s, %s, %s, %s, %s\n", request.UserAgent(), request.RemoteAddr, request.Method, request.Proto, request.URL, time.Since(timer))
 }
 
 func templateUntil(n int) []int {
@@ -1008,22 +1008,17 @@ func serveFavicon(writer http.ResponseWriter, request *http.Request, params http
 }
 
 func serveIndex(writer http.ResponseWriter, request *http.Request, params httprouter.Params) {
-
+	timer := time.Now()
 	templateFiles := []string{
 		"./template/base.template.html",
 		"./template/index.template.html",
 	}
 
-	serveFilesFromTemplate(writer, request, params, templateFiles, struct{ UnicodeVersion string }{UnicodeVersion: unicode.Version})
+	serveFilesFromTemplate(writer, request, params, templateFiles, struct{ UnicodeVersion string }{UnicodeVersion: unicode.Version}, timer)
 }
 
-func redirectToSSL(writer http.ResponseWriter, request *http.Request, params httprouter.Params) {
-	route := params.ByName("route")
-	if route == "/" {
-		route = ""
-	}
-	log.Printf("REDIRECTING TO SSL: %s %s %s \n", request.RemoteAddr, request.URL, request.Proto)
-	http.Redirect(writer, request, "https://localhost/"+route, http.StatusMovedPermanently)
+func redirectToTls(w http.ResponseWriter, r *http.Request) {
+	http.Redirect(w, r, "https://unicode.click:443"+r.RequestURI, http.StatusMovedPermanently)
 }
 
 func main() {
@@ -1040,11 +1035,13 @@ func main() {
 	router.GET("/cp/:cpRoute", codepointFromRoute)
 	router.GET("/range/:rangeRoute", rangeFromRoute)
 
-	sslRedirect := httprouter.New()
-	sslRedirect.GET("/*route", redirectToSSL)
+	fmt.Println("unicode.click listening on 443")
 
-	fmt.Println("unicode.click listening on 443 and 8080")
+	go func() {
+		if err := http.ListenAndServe(":80", http.HandlerFunc(redirectToTls)); err != nil {
+			log.Fatalf("ListenAndServe error: %v", err)
+		}
+	}()
 
-	// log.Fatal(http.ListenAndServe(":8080", router))
 	log.Fatal(http.ListenAndServeTLS(":443", "./ssl/domain.cert.pem", "./ssl/private.key.pem", router))
 }
