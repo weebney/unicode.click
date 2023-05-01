@@ -1017,8 +1017,17 @@ func serveIndex(writer http.ResponseWriter, request *http.Request, params httpro
 	serveFilesFromTemplate(writer, request, params, templateFiles, struct{ UnicodeVersion string }{UnicodeVersion: unicode.Version}, timer)
 }
 
-func redirectToTls(w http.ResponseWriter, r *http.Request) {
-	http.Redirect(w, r, "https://unicode.click:443"+r.RequestURI, http.StatusMovedPermanently)
+func redirectToTls(writer http.ResponseWriter, request *http.Request) {
+	log.Printf("Redirecting, %v, %v\n", request.RemoteAddr, request.URL)
+	http.Redirect(writer, request, "https://unicode.click:443"+request.RequestURI, http.StatusMovedPermanently)
+
+}
+
+func serveSitemap(writer http.ResponseWriter, request *http.Request, params httprouter.Params) {
+	timer := time.Now()
+	route := params.ByName("route")
+	http.ServeFile(writer, request, "./sitemaps/"+route)
+	log.Printf("Sitemap, %v, %v, %v, %v\n", request.UserAgent(), request.RemoteAddr, request.URL, time.Since(timer))
 }
 
 func main() {
@@ -1034,6 +1043,7 @@ func main() {
 	router.GET("/", serveIndex)
 	router.GET("/cp/:cpRoute", codepointFromRoute)
 	router.GET("/range/:rangeRoute", rangeFromRoute)
+	router.GET("/sitemaps/:route", serveSitemap)
 
 	fmt.Println("unicode.click listening on 443")
 
