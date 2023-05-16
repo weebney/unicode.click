@@ -11,44 +11,6 @@ import (
 	"github.com/julienschmidt/httprouter"
 )
 
-/* var allUnicodeRangeTable unicode.RangeTable = unicode.RangeTable{
-	R16: []unicode.Range16{{
-		Lo:     0,
-		Hi:     0xFFFF,
-		Stride: 1,
-	}},
-
-	R32: []unicode.Range32{{
-		Lo:     0,
-		Hi:     0xFFFFFFFF,
-		Stride: 1,
-	}},
-
-	LatinOffset: 0,
-} */
-
-type table struct {
-	name string
-	rows []row
-}
-
-type row struct {
-	name string
-	row  []rune
-}
-
-type rangeData struct {
-	RangeTableName string
-	Tables         []table
-
-	UnicodeVersion string
-
-	NumberOfTables int
-	TableLengths   []int
-
-	TableLiteral string
-}
-
 func main() {
 	f, err := os.OpenFile("./log/"+fmt.Sprint(time.Now())+".log", os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
 	if err != nil {
