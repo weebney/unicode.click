@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"html/template"
 	"net/http"
 	"strconv"
 	"strings"
@@ -30,7 +31,7 @@ type rangeData struct {
 	NumberOfTables int
 	TableLengths   []int
 
-	TableLiteral string
+	TableLiteral template.HTML
 }
 
 /* var allUnicodeRangeTable unicode.RangeTable = unicode.RangeTable{
@@ -149,8 +150,8 @@ func rangeFromRoute(writer http.ResponseWriter, request *http.Request, params ht
 	serveFilesFromTemplate(writer, request, params, templateFiles, data, timer)
 }
 
-func generateTableHtml(tables []table, tableLengths []int, literalRT *unicode.RangeTable) string {
-	var literal []string
+func generateTableHtml(tables []table, tableLengths []int, literalRT *unicode.RangeTable) template.HTML {
+	var literal []template.HTML
 
 	literal = append(literal, "<div id=tables>")
 
@@ -178,12 +179,12 @@ func generateTableHtml(tables []table, tableLengths []int, literalRT *unicode.Ra
 		`)
 		for row := 0; row < tableLengths[i]; row++ {
 			literal = append(literal, "<tr>")
-			literal = append(literal, "<td>U+", tables[i].rows[row].name, "</td>")
+			literal = append(literal, "<td>U+", template.HTML(tables[i].rows[row].name), "</td>")
 			for j := 0; j < len(tables[i].rows[row].row); j++ {
 				if unicode.In(tables[i].rows[row].row[j], literalRT) {
-					literal = append(literal, `<td><a href="/cp/`, fmt.Sprintf("%U", tables[i].rows[row].row[j]), `">`, string(tables[i].rows[row].row[j]), "</a></td>")
+					literal = append(literal, `<td><a href="/cp/`, template.HTML(fmt.Sprintf("%U", tables[i].rows[row].row[j])), `">`, template.HTML(tables[i].rows[row].row[j]), "</a></td>")
 				} else {
-					literal = append(literal, `<td class="invalid"><a href="/cp/`, fmt.Sprintf("%U", tables[i].rows[row].row[j]), `">`, string(tables[i].rows[row].row[j]), "</a></td>")
+					literal = append(literal, `<td class="invalid"><a href="/cp/`, template.HTML(fmt.Sprintf("%U", tables[i].rows[row].row[j])), `">`, template.HTML(tables[i].rows[row].row[j]), "</a></td>")
 				}
 			}
 			literal = append(literal, "</tr>")
@@ -193,7 +194,29 @@ func generateTableHtml(tables []table, tableLengths []int, literalRT *unicode.Ra
 
 	literal = append(literal, "</div>")
 
-	output := strings.Join(literal, "")
+	output := htmlJoin(literal, "")
 
 	return output
+}
+
+func htmlJoin(elems []template.HTML, sep string) template.HTML {
+	switch len(elems) {
+	case 0:
+		return ""
+	case 1:
+		return elems[0]
+	}
+	n := len(sep) * (len(elems) - 1)
+	for i := 0; i < len(elems); i++ {
+		n += len(elems[i])
+	}
+
+	var b strings.Builder
+	b.Grow(n)
+	b.WriteString(string(elems[0]))
+	for _, s := range elems[1:] {
+		b.WriteString(sep)
+		b.WriteString(string(s))
+	}
+	return template.HTML(b.String())
 }
