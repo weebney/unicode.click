@@ -1,0 +1,54 @@
+table {
+	border-collapse: collapse;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.invalid {
+	background-color: black;
+	color: white;
+}
+
+td,
+th {
+	aspect-ratio: 1 / 1;
+
+	width: 5vh;
+	height: 5vh;
+
+	font-size: 4vh;
+
+	max-width: 5vh;
+	max-height: 5vh;
+
+	padding: 0vw;
+
+	text-align: center;
+
+	overflow: visible;
+	font-weight: normal;
+	border: 1px dashed grey;
+}
+
+th:empty {
+	border: none;
+}
+
+td:nth-child(1),
+th {
+	font-size: small;
+}
+
+@media only screen and (max-width: 992px) {
+
+	td,
+	th {
+		width: 5vw;
+		height: 5vw;
+	}
+
+	td {
+		font-size: 4vw;
+	}
+}

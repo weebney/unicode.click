@@ -8,35 +8,29 @@ import (
 	"time"
 	"unicode"
 
-	"github.com/julienschmidt/httprouter"
 	"golang.org/x/text/unicode/runenames"
 )
 
-func codepointFromRoute(writer http.ResponseWriter, request *http.Request, params httprouter.Params) {
-	timer := time.Now()
-	route := params.ByName("cpRoute")
-
-	writer.Header().Set("Content-Type", "text/html; charset=utf-8")
-	writer.Header().Set("Cache-Control", "no-cache, no-store, must-revalidate")
-	writer.Header().Set("Pragma", "no-cache")
-	writer.Header().Set("Expires", "0")
+func serveCodepoint(writer http.ResponseWriter, request *http.Request, route string, timer time.Time) {
+	writer = setHeaders(writer)
 
 	var codepoint rune
 
 	if strings.ContainsRune(route, '+') {
-		// convert UTF-16 w/ U+ prefix (i.e. +0061) to rune type
+		// convert from U+ prefix (i.e. U+0061) to rune
 		tempRoute := strings.SplitAfter(route, "+")
 		codepointInt64, _ := strconv.ParseInt(tempRoute[1], 16, 0)
-		codepoint = int32(codepointInt64)
+		codepoint = rune(codepointInt64)
 	} else {
-		// convert literal character to rune
+		// convert first character to rune
 		runeArray := []rune(route)
-		codepoint = int32(runeArray[0])
+		codepoint = rune(runeArray[0])
 	}
 
 	// check if codepoint exists, do something else if not
 	if codepoint > unicode.MaxRune || codepoint < 0 || codepoint > 2147483647 {
-		http.Error(writer, "Not Found", 404)
+		// TODO: create a dedicated 404 page with a JS-based automatic redirect
+		http.Redirect(writer, request, "https://unicode.click/", http.StatusMovedPermanently)
 		return
 	}
 
@@ -56,7 +50,7 @@ func codepointFromRoute(writer http.ResponseWriter, request *http.Request, param
 		}
 	}
 
-	var data = struct {
+	data := struct {
 		CodepointHexAsString string
 		LitRune              string
 		RuneName             string
@@ -129,5 +123,5 @@ func codepointFromRoute(writer http.ResponseWriter, request *http.Request, param
 		"./template/rune.template.html",
 	}
 
-	serveFilesFromTemplate(writer, request, params, templateFiles, data, timer)
+	serveFilesFromTemplate(writer, request, templateFiles, data, timer)
 }

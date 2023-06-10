@@ -8,8 +8,6 @@ import (
 	"strings"
 	"time"
 	"unicode"
-
-	"github.com/julienschmidt/httprouter"
 )
 
 type table struct {
@@ -115,20 +113,12 @@ func generateTableFromRTLiteral(rtLiteral *unicode.RangeTable) (tables []table, 
 	return
 }
 
-func rangeFromRoute(writer http.ResponseWriter, request *http.Request, params httprouter.Params) {
-	timer := time.Now()
-	route := strings.ToLower(params.ByName("rangeRoute"))
-
-	writer.Header().Set("Content-Type", "text/html; charset=utf-8")
-	writer.Header().Set("Cache-Control", "no-cache, no-store, must-revalidate")
-	writer.Header().Set("Pragma", "no-cache")
-	writer.Header().Set("Expires", "0")
-
+func serveRange(writer http.ResponseWriter, request *http.Request, route string, timer time.Time) {
+	writer = setHeaders(writer)
 	rtLiteral := getRangeTableLiteral(route)
-
 	tables, tableLengths := generateTableFromRTLiteral(rtLiteral)
 
-	var data = rangeData{
+	data := rangeData{
 		RangeTableName: route,
 		Tables:         tables,
 
@@ -140,17 +130,17 @@ func rangeFromRoute(writer http.ResponseWriter, request *http.Request, params ht
 		TableLiteral: "",
 	}
 
-	data.TableLiteral = generateTableHtml(data.Tables, data.TableLengths, rtLiteral)
+	data.TableLiteral = generateTableHTML(data.Tables, data.TableLengths, rtLiteral)
 
 	templateFiles := []string{
 		"./template/base.template.html",
 		"./template/range.template.html",
 	}
 
-	serveFilesFromTemplate(writer, request, params, templateFiles, data, timer)
+	serveFilesFromTemplate(writer, request, templateFiles, data, timer)
 }
 
-func generateTableHtml(tables []table, tableLengths []int, literalRT *unicode.RangeTable) template.HTML {
+func generateTableHTML(tables []table, tableLengths []int, literalRT *unicode.RangeTable) template.HTML {
 	var literal []template.HTML
 
 	literal = append(literal, "<div id=tables>")
@@ -194,9 +184,7 @@ func generateTableHtml(tables []table, tableLengths []int, literalRT *unicode.Ra
 
 	literal = append(literal, "</div>")
 
-	output := htmlJoin(literal, "")
-
-	return output
+	return htmlJoin(literal, "")
 }
 
 func htmlJoin(elems []template.HTML, sep string) template.HTML {

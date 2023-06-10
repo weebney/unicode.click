@@ -1,0 +1,109 @@
+#main {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: fit-content;
+	padding-top: 3vh;
+}
+
+#nav {
+	width: 50vw;
+	font-size: 14px;
+	text-align: justify;
+}
+
+#trifold {
+	width: 50%;
+	display: grid;
+	grid-template-rows: auto 1fr auto;
+	height: fit-content;
+	padding-bottom: 3vh;
+}
+
+ul {
+	list-style-position: inside;
+	padding-left: 0;
+	width: fit-content;
+
+	display: flex;
+	flex-wrap: wrap;
+
+	flex-grow: 4;
+
+	justify-content: left;
+	align-items: stretch;
+	flex-direction: row;
+}
+
+.shortNames>* {
+	width: calc(100% / 6);
+}
+
+.longNames>* {
+	width: calc(100% / 4);
+}
+
+.xLongNames>* {
+	width: calc(100% / 3);
+}
+
+#catprop {
+	display: flex;
+	flex-direction: column-reverse;
+}
+
+@media only screen and (max-width: 1600px) {
+
+	#nav,
+	#main,
+	#trifold {
+		width: 75vw;
+
+	}
+}
+
+@media only screen and (max-width: 1000px) {
+
+	#nav,
+	#main {
+		width: 85vw;
+
+	}
+}
+
+@media only screen and (max-width: 1300px) {
+	.longNames>* {
+		width: calc(100% / 3);
+	}
+}
+
+@media only screen and (max-width: 975px) {
+	.longNames>* {
+		width: calc(100% / 2);
+	}
+
+	.xLongNames>* {
+		width: 100%;
+	}
+}
+
+@media only screen and (min-width: 705px) and (max-width: 975px) {
+	#catprop {
+		display: grid;
+		grid-template-columns: auto 1fr;
+	}
+
+	.shortNames>* {
+		width: calc(100% / 2);
+	}
+}
+
+@media only screen and (max-width: 625px) {
+	.longNames>* {
+		width: 100%;
+	}
+
+	.shortNames>* {
+		width: calc(100% / 3);
+	}
+}

@@ -1,48 +1,7 @@
 {{define "title"}}{{end}}
 
 {{define "extraHead"}}
-<style>
-    #main {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        height: fit-content;
-        padding-top: 3vh;
-    }
-
-    #nav {
-        width: 50vw;
-        font-size: 14px;
-        text-align: justify;
-    }
-
-    #trifold {
-        width: 50% ;
-        display:grid;
-        grid-template-rows: auto 1fr auto;
-        height: fit-content;
-        padding-bottom: 3vh;
-    }
-
-    ul {
-        list-style-position: inside;
-        padding-left: 0;
-        width: fit-content;
-
-        display: flex;
-        flex-wrap: wrap;
-
-        justify-content: left;
-        align-items: center;
-        flex-direction: row;
-    }
-
-    li {
-        width: calc(100% / 3);
-    }
-
-</style>
-</style>
+<link rel="stylesheet" href="https://unicode.click/res/index.css">
 {{end}}
 
 {{define "main"}}
@@ -54,7 +13,7 @@
         <div id="nav">
             <p>
                 There is no technology more human than language. Few things have been as revolutionary to our kind as
-                our discoveries that rely on language- society, culture, recorded history, mathematics, the printing
+                our discoveries that rely on language—society, culture, recorded history, mathematics, the printing
                 press, LLMs.
                 Language, however, has a problem in that, in the image of its creators, it is complex and beastly.
                 Taming language for the internet age would be no simple task, but what emerged was something unexpected.
@@ -75,119 +34,121 @@
 </div>
 <div style="display: flex; align-items: center;justify-content: center;">
     <div id="trifold">
-        <div>
+        <div id="catprop">
             <div>
-                <h2>Categories<sup><a href="https://en.wikipedia.org/wiki/Unicode_character_property#General_Category"
-                            target="_blank">?</a></sup>
-                </h2>
+                <h2>Properties</h2>
+                <ul class="longNames xLongNames">
+                    <li><a href="/range/ascii_hex_digit">ascii_hex_digit</a></li>
+                    <li><a href="/range/bidi_control">bidi_control</a></li>
+                    <li><a href="/range/dash">dash</a></li>
+                    <li><a href="/range/deprecated">deprecated</a></li>
+                    <li><a href="/range/diacritic">diacritic</a></li>
+                    <li><a href="/range/extender">extender</a></li>
+                    <li><a href="/range/hex_digit">hex_digit</a></li>
+                    <li><a href="/range/hyphen">hyphen</a></li>
+                    <li><a href="/range/ids_binary_operator">ids_binary_operator</a></li>
+                    <li><a href="/range/ids_trinary_operator">ids_trinary_operator</a></li>
+                    <li><a href="/range/ideographic">ideographic</a></li>
+                    <li><a href="/range/join_control">join_control</a></li>
+                    <li><a href="/range/logical_order_exception">logical_order_exception</a></li>
+                    <!--                 <li><a href="/range/noncharacter_code_point">noncharacter_code_point</a></li>
+ -->
+                    <li><a href="/range/other_alphabetic">other_alphabetic</a></li>
+                    <li><a href="/range/other_default_ignorable_code_point">other_default_ignorable_code_point</a>
+                    </li>
+                    <li><a href="/range/other_grapheme_extend">other_grapheme_extend</a></li>
+                    <li><a href="/range/other_id_continue">other_id_continue</a></li>
+                    <li><a href="/range/other_id_start">other_id_start</a></li>
+                    <li><a href="/range/other_lowercase">other_lowercase</a></li>
+                    <li><a href="/range/other_math">other_math</a></li>
+                    <li><a href="/range/other_uppercase">other_uppercase</a></li>
+                    <li><a href="/range/pattern_syntax">pattern_syntax</a></li>
+                    <li><a href="/range/pattern_white_space">pattern_white_space</a></li>
+                    <li><a href="/range/prepended_concatenation_mark">prepended_concatenation_mark</a></li>
+                    <li><a href="/range/quotation_mark">quotation_mark</a></li>
+                    <li><a href="/range/radical">radical</a></li>
+                    <li><a href="/range/regional_indicator">regional_indicator</a></li>
+                    <!--                 <li><a href="/range/sterm">sterm</a></li>
+ -->
+                    <li><a href="/range/sentence_terminal">sentence_terminal</a></li>
+                    <li><a href="/range/soft_dotted">soft_dotted</a></li>
+                    <li><a href="/range/terminal_punctuation">terminal_punctuation</a></li>
+                    <li><a href="/range/unified_ideograph">unified_ideograph</a></li>
+                    <li><a href="/range/variation_selector">variation_selector</a></li>
+                    <li><a href="/range/white_space">white_space</a></li>
+                </ul>
             </div>
-            <ul>
-                <li><a href="/range/cc">cc</a></li>
-                <li><a href="/range/cf">cf</a></li>
-                <li><a href="/range/co">co</a></li>
-                <li><a href="/range/cs">cs</a></li>
-                <li><a href="/range/nd">nd</a></li>
-                <!--                 <li><a href="/range/letter">letter</a></li>
+            <div>
+                <div>
+                    <h2>Categories<sup><a
+                                href="https://en.wikipedia.org/wiki/Unicode_character_property#General_Category"
+                                target="_blank">?</a></sup>
+                    </h2>
+                </div>
+                <ul class="shortNames">
+                    <li><a href="/range/cc">cc</a></li>
+                    <li><a href="/range/cf">cf</a></li>
+                    <li><a href="/range/co">co</a></li>
+                    <li><a href="/range/cs">cs</a></li>
+                    <li><a href="/range/nd">nd</a></li>
+                    <!--                 <li><a href="/range/letter">letter</a></li>
  -->
-                <li><a href="/range/l">l</a></li>
-                <li><a href="/range/lm">lm</a></li>
-                <li><a href="/range/lo">lo</a></li>
-                <!--                 <li><a href="/range/lower">lower</a></li>
+                    <li><a href="/range/l">l</a></li>
+                    <li><a href="/range/lm">lm</a></li>
+                    <li><a href="/range/lo">lo</a></li>
+                    <!--                 <li><a href="/range/lower">lower</a></li>
  -->
-                <li><a href="/range/ll">ll</a></li>
-                <!--                 <li><a href="/range/mark">mark</a></li>
+                    <li><a href="/range/ll">ll</a></li>
+                    <!--                 <li><a href="/range/mark">mark</a></li>
  -->
-                <li><a href="/range/m">m</a></li>
-                <li><a href="/range/mc">mc</a></li>
-                <li><a href="/range/me">me</a></li>
-                <li><a href="/range/mn">mn</a></li>
-                <li><a href="/range/nl">nl</a></li>
-                <li><a href="/range/no">no</a></li>
-                <!--                 <li><a href="/range/number">number</a></li>
+                    <li><a href="/range/m">m</a></li>
+                    <li><a href="/range/mc">mc</a></li>
+                    <li><a href="/range/me">me</a></li>
+                    <li><a href="/range/mn">mn</a></li>
+                    <li><a href="/range/nl">nl</a></li>
+                    <li><a href="/range/no">no</a></li>
+                    <!--                 <li><a href="/range/number">number</a></li>
  -->
-                <li><a href="/range/n">n</a></li>
-                <!--                 <li><a href="/range/other">other</a></li>
+                    <li><a href="/range/n">n</a></li>
+                    <!--                 <li><a href="/range/other">other</a></li>
  -->
-                <li><a href="/range/c">c</a></li>
-                <li><a href="/range/pc">pc</a></li>
-                <li><a href="/range/pd">pd</a></li>
-                <li><a href="/range/pe">pe</a></li>
-                <li><a href="/range/pf">pf</a></li>
-                <li><a href="/range/pi">pi</a></li>
-                <li><a href="/range/po">po</a></li>
-                <li><a href="/range/ps">ps</a></li>
-                <!--                 <li><a href="/range/punct">punct</a></li>
+                    <li><a href="/range/c">c</a></li>
+                    <li><a href="/range/pc">pc</a></li>
+                    <li><a href="/range/pd">pd</a></li>
+                    <li><a href="/range/pe">pe</a></li>
+                    <li><a href="/range/pf">pf</a></li>
+                    <li><a href="/range/pi">pi</a></li>
+                    <li><a href="/range/po">po</a></li>
+                    <li><a href="/range/ps">ps</a></li>
+                    <!--                 <li><a href="/range/punct">punct</a></li>
  -->
-                <li><a href="/range/p">p</a></li>
-                <li><a href="/range/sc">sc</a></li>
-                <li><a href="/range/sk">sk</a></li>
-                <li><a href="/range/sm">sm</a></li>
-                <li><a href="/range/so">so</a></li>
-                <!--                 <li><a href="/range/space">space</a></li>
+                    <li><a href="/range/p">p</a></li>
+                    <li><a href="/range/sc">sc</a></li>
+                    <li><a href="/range/sk">sk</a></li>
+                    <li><a href="/range/sm">sm</a></li>
+                    <li><a href="/range/so">so</a></li>
+                    <!--                 <li><a href="/range/space">space</a></li>
  -->
-                <li><a href="/range/z">z</a></li>
-                <!--                 <li><a href="/range/symbol">symbol</a></li>
+                    <li><a href="/range/z">z</a></li>
+                    <!--                 <li><a href="/range/symbol">symbol</a></li>
  -->
-                <li><a href="/range/s">s</a></li>
-                <!--                 <li><a href="/range/title">title</a></li>
+                    <li><a href="/range/s">s</a></li>
+                    <!--                 <li><a href="/range/title">title</a></li>
  -->
-                <li><a href="/range/lt">lt</a></li>
-                <!--                 <li><a href="/range/upper">upper</a></li>
+                    <li><a href="/range/lt">lt</a></li>
+                    <!--                 <li><a href="/range/upper">upper</a></li>
  -->
-                <li><a href="/range/lu">lu</a></li>
-                <li><a href="/range/zl">zl</a></li>
-                <li><a href="/range/zp">zp</a></li>
-                <li><a href="/range/zs">zs</a></li>
-            </ul>
-        </div>
-
-        <div>
-            <h2>Properties</h2>
-            <ul>
-                <li><a href="/range/ascii_hex_digit">ascii_hex_digit</a></li>
-                <li><a href="/range/bidi_control">bidi_control</a></li>
-                <li><a href="/range/dash">dash</a></li>
-                <li><a href="/range/deprecated">deprecated</a></li>
-                <li><a href="/range/diacritic">diacritic</a></li>
-                <li><a href="/range/extender">extender</a></li>
-                <li><a href="/range/hex_digit">hex_digit</a></li>
-                <li><a href="/range/hyphen">hyphen</a></li>
-                <li><a href="/range/ids_binary_operator">ids_binary_operator</a></li>
-                <li><a href="/range/ids_trinary_operator">ids_trinary_operator</a></li>
-                <li><a href="/range/ideographic">ideographic</a></li>
-                <li><a href="/range/join_control">join_control</a></li>
-                <li><a href="/range/logical_order_exception">logical_order_exception</a></li>
-                <!--                 <li><a href="/range/noncharacter_code_point">noncharacter_code_point</a></li>
- -->
-                <li><a href="/range/other_alphabetic">other_alphabetic</a></li>
-                <li><a href="/range/other_default_ignorable_code_point">other_default_ignorable_code_point</a>
-                </li>
-                <li><a href="/range/other_grapheme_extend">other_grapheme_extend</a></li>
-                <li><a href="/range/other_id_continue">other_id_continue</a></li>
-                <li><a href="/range/other_id_start">other_id_start</a></li>
-                <li><a href="/range/other_lowercase">other_lowercase</a></li>
-                <li><a href="/range/other_math">other_math</a></li>
-                <li><a href="/range/other_uppercase">other_uppercase</a></li>
-                <li><a href="/range/pattern_syntax">pattern_syntax</a></li>
-                <li><a href="/range/pattern_white_space">pattern_white_space</a></li>
-                <li><a href="/range/prepended_concatenation_mark">prepended_concatenation_mark</a></li>
-                <li><a href="/range/quotation_mark">quotation_mark</a></li>
-                <li><a href="/range/radical">radical</a></li>
-                <li><a href="/range/regional_indicator">regional_indicator</a></li>
-                <!--                 <li><a href="/range/sterm">sterm</a></li>
- -->
-                <li><a href="/range/sentence_terminal">sentence_terminal</a></li>
-                <li><a href="/range/soft_dotted">soft_dotted</a></li>
-                <li><a href="/range/terminal_punctuation">terminal_punctuation</a></li>
-                <li><a href="/range/unified_ideograph">unified_ideograph</a></li>
-                <li><a href="/range/variation_selector">variation_selector</a></li>
-                <li><a href="/range/white_space">white_space</a></li>
-            </ul>
+                    <li><a href="/range/lu">lu</a></li>
+                    <li><a href="/range/zl">zl</a></li>
+                    <li><a href="/range/zp">zp</a></li>
+                    <li><a href="/range/zs">zs</a></li>
+                </ul>
+            </div>
         </div>
 
         <div>
             <h2>Scripts</h2>
-            <ul>
+            <ul class="longNames">
                 <li><a href="/range/adlam">adlam</a></li>
                 <li><a href="/range/ahom">ahom</a></li>
                 <li><a href="/range/anatolian_hieroglyphs">anatolian_hieroglyphs</a></li>
@@ -347,7 +308,7 @@
             </ul>
         </div>
 
-        
+
     </div>
 </div>
 {{end}}

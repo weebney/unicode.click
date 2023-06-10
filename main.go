@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"io"
 	"log"
+	"math/rand"
 	"net/http"
 	"os"
 	"time"
@@ -11,25 +12,25 @@ import (
 	"github.com/julienschmidt/httprouter"
 )
 
-func main() {
-	f, err := os.OpenFile("./log/"+fmt.Sprint(time.Now())+".log", os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
+var ucVersion = "0.2.0"
+
+func init() {
+	f, err := os.OpenFile("./log/"+fmt.Sprint(time.Now())+".log", os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0o644)
 	if err != nil {
 		log.Fatal(err)
 	}
-	logWriter := io.MultiWriter(f, os.Stdout)
-	log.SetOutput(logWriter)
+	log.SetOutput(io.MultiWriter(f, os.Stdout))
+	rand.Seed(int64(f.Fd()))
+}
 
+func main() {
 	router := httprouter.New()
-	router.GET("/favicon.ico", serveFavicon)
-	router.GET("/", serveIndex)
-	router.GET("/cp/:cpRoute", codepointFromRoute)
-	router.GET("/range/:rangeRoute", rangeFromRoute)
-	router.GET("/sitemaps/:route", serveSitemap)
+	router.GET("/*filepath", serveUnicodeClick)
 
 	fmt.Println("unicode.click listening on 443")
 
 	go func() {
-		if err := http.ListenAndServe(":80", http.HandlerFunc(redirectToTls)); err != nil {
+		if err := http.ListenAndServe(":80", http.HandlerFunc(redirectToTLS)); err != nil {
 			log.Fatalf("ListenAndServe error: %v", err)
 		}
 	}()
