@@ -26,6 +26,7 @@ func logNow(request *http.Request, timer time.Time) {
 func setHeaders(writer http.ResponseWriter) http.ResponseWriter {
 	writer.Header().Set("Content-Type", "text/html; charset=utf-8")
 	writer.Header().Set("Cache-Control", "public, max-age=3600")
+	writer.Header().Set("X-Powered-By", "Diet Coke")
 	writer.Header().Set("ETag", ucVersion)
 
 	return writer

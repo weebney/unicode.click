@@ -114,6 +114,7 @@ func generateTableFromRTLiteral(rtLiteral *unicode.RangeTable) (tables []table, 
 }
 
 func serveRange(writer http.ResponseWriter, request *http.Request, route string, timer time.Time) {
+	route = strings.ToLower(route)
 	writer = setHeaders(writer)
 	rtLiteral := getRangeTableLiteral(route)
 	tables, tableLengths := generateTableFromRTLiteral(rtLiteral)
